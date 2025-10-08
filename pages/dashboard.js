@@ -5,6 +5,8 @@ import DatePicker from 'react-datepicker'
 export default function Dashboard() {
   const [prices, setPrices] = useState([])
   const [sourceFilter, setSourceFilter] = useState('all')
+  const [startDate, setStartDate] = useState(null)
+  const [endDate, setEndDate] = useState(null)
 
   useEffect(() => {
     async function fetchPrices() {
@@ -15,20 +17,12 @@ export default function Dashboard() {
     fetchPrices()
   }, [])
 
-  const filteredPrices =
-    sourceFilter === 'all'
-      ? prices
-      : prices.filter(p => p.source === sourceFilter)
-
-const [startDate, setStartDate] = useState(null)
-const [endDate, setEndDate] = useState(null)
-
-const filteredPrices = prices
-  .filter(p => sourceFilter === 'all' || p.source === sourceFilter)
-  .filter(p => {
-    const ts = new Date(p.timestamp)
-    return (!startDate || ts >= startDate) && (!endDate || ts <= endDate)
-  })
+  const filteredPrices = prices
+    .filter(p => sourceFilter === 'all' || p.source === sourceFilter)
+    .filter(p => {
+      const ts = new Date(p.timestamp)
+      return (!startDate || ts >= startDate) && (!endDate || ts <= endDate)
+    })
 
   return (
     <main className="min-h-screen bg-gray-100 p-6">
@@ -42,32 +36,32 @@ const filteredPrices = prices
         >
           📤 Download CSV
         </a>
-		
-		<div className="mb-4 grid grid-cols-1 sm:grid-cols-2 gap-4">
-  <div>
-    <label className="block text-sm font-medium text-gray-700 mb-1">Start Date</label>
-    <DatePicker
-      selected={startDate}
-      onChange={date => setStartDate(date)}
-      className="border rounded px-3 py-2 w-full"
-      placeholderText="Select start date"
-      isClearable
-    />
-  </div>
-  <div>
-    <label className="block text-sm font-medium text-gray-700 mb-1">End Date</label>
-    <DatePicker
-      selected={endDate}
-      onChange={date => setEndDate(date)}
-      className="border rounded px-3 py-2 w-full"
-      placeholderText="Select end date"
-      isClearable
-    />
-  </div>
-</div>
 
+        {/* Date Range Pickers */}
+        <div className="mb-4 grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-1">Start Date</label>
+            <DatePicker
+              selected={startDate}
+              onChange={date => setStartDate(date)}
+              className="border rounded px-3 py-2 w-full"
+              placeholderText="Select start date"
+              isClearable
+            />
+          </div>
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-1">End Date</label>
+            <DatePicker
+              selected={endDate}
+              onChange={date => setEndDate(date)}
+              className="border rounded px-3 py-2 w-full"
+              placeholderText="Select end date"
+              isClearable
+            />
+          </div>
+        </div>
 
-        {/* Filter Dropdown */}
+        {/* Source Filter Dropdown */}
         <div className="mb-4">
           <label className="block text-sm font-medium text-gray-700 mb-1">Filter by Source</label>
           <select
@@ -77,13 +71,14 @@ const filteredPrices = prices
           >
             <option value="all">All Sources</option>
             <option value="Binance">Binance</option>
-			<option value="Bitstamp">Bitstamp</option>
+            <option value="Bitstamp">Bitstamp</option>
             <option value="Coinbase">Coinbase</option>
             <option value="Kraken">Kraken</option>
           </select>
         </div>
 
-<PriceChart prices={filteredPrices} />
+        <PriceChart prices={filteredPrices} />
+
         <table className="w-full border-collapse">
           <thead>
             <tr className="bg-gray-200 text-left text-sm text-gray-700">
@@ -93,7 +88,7 @@ const filteredPrices = prices
             </tr>
           </thead>
           <tbody>
-            {prices.map((p, i) => (
+            {filteredPrices.map((p, i) => (
               <tr key={i} className="border-t hover:bg-gray-50">
                 <td className="p-3 text-sm text-gray-600">{p.timestamp}</td>
                 <td className="p-3 text-sm text-gray-600">{p.source}</td>
