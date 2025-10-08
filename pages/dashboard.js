@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import PriceChart from '../components/PriceChart'
 
 export default function Dashboard() {
   const [prices, setPrices] = useState([])
@@ -23,7 +24,8 @@ export default function Dashboard() {
 >
   📤 Download CSV
 </a>
-
+// Inside your return block
+<PriceChart prices={prices} />
         <table className="w-full border-collapse">
           <thead>
             <tr className="bg-gray-200 text-left text-sm text-gray-700">
