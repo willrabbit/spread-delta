@@ -43,6 +43,7 @@ export default function Dashboard() {
           >
             <option value="all">All Sources</option>
             <option value="Binance">Binance</option>
+			<option value="Bitstamp">Bitstamp</option>
             <option value="Coinbase">Coinbase</option>
             <option value="Kraken">Kraken</option>
           </select>
