@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import PriceChart from '../components/PriceChart'
-
+import DatePicker from 'react-datepicker'
 
 export default function Dashboard() {
   const [prices, setPrices] = useState([])
@@ -20,6 +20,16 @@ export default function Dashboard() {
       ? prices
       : prices.filter(p => p.source === sourceFilter)
 
+const [startDate, setStartDate] = useState(null)
+const [endDate, setEndDate] = useState(null)
+
+const filteredPrices = prices
+  .filter(p => sourceFilter === 'all' || p.source === sourceFilter)
+  .filter(p => {
+    const ts = new Date(p.timestamp)
+    return (!startDate || ts >= startDate) && (!endDate || ts <= endDate)
+  })
+
   return (
     <main className="min-h-screen bg-gray-100 p-6">
       <div className="max-w-4xl mx-auto bg-white shadow-lg rounded-xl p-6">
@@ -32,6 +42,30 @@ export default function Dashboard() {
         >
           📤 Download CSV
         </a>
+		
+		<div className="mb-4 grid grid-cols-1 sm:grid-cols-2 gap-4">
+  <div>
+    <label className="block text-sm font-medium text-gray-700 mb-1">Start Date</label>
+    <DatePicker
+      selected={startDate}
+      onChange={date => setStartDate(date)}
+      className="border rounded px-3 py-2 w-full"
+      placeholderText="Select start date"
+      isClearable
+    />
+  </div>
+  <div>
+    <label className="block text-sm font-medium text-gray-700 mb-1">End Date</label>
+    <DatePicker
+      selected={endDate}
+      onChange={date => setEndDate(date)}
+      className="border rounded px-3 py-2 w-full"
+      placeholderText="Select end date"
+      isClearable
+    />
+  </div>
+</div>
+
 
         {/* Filter Dropdown */}
         <div className="mb-4">
