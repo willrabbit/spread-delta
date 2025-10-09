@@ -5,44 +5,27 @@ type TileProps = {
 };
 
 export default function Tile({ name, price, signal }: TileProps) {
-  let bgColor = '';
-  let borderColor = '';
-  let textColor = '';
+  let tileClass = '';
 
-  switch (signal) {
-    case 'buy':
-      bgColor = 'bg-green-100';
-      borderColor = 'border-green-300';
-      textColor = 'text-green-700';
-      break;
-    case 'sell':
-      bgColor = 'bg-red-100';
-      borderColor = 'border-red-300';
-      textColor = 'text-red-700';
-      break;
-    case 'neutral':
-      bgColor = 'bg-yellow-100';
-      borderColor = 'border-yellow-300';
-      textColor = 'text-yellow-700';
-      break;
-    case 'opportunity':
-      bgColor = 'bg-blue-100';
-      borderColor = 'border-blue-300';
-      textColor = 'text-blue-700';
-      break;
-    default:
-      bgColor = 'bg-gray-100';
-      borderColor = 'border-gray-300';
-      textColor = 'text-gray-700';
+  if (signal === 'buy') {
+    tileClass = 'bg-green-100 border-green-300 text-green-700';
+  } else if (signal === 'sell') {
+    tileClass = 'bg-red-100 border-red-300 text-red-700';
+  } else if (signal === 'neutral') {
+    tileClass = 'bg-yellow-100 border-yellow-300 text-yellow-700';
+  } else if (signal === 'opportunity') {
+    tileClass = 'bg-blue-100 border-blue-300 text-blue-700';
+  } else {
+    tileClass = 'bg-gray-100 border-gray-300 text-gray-700';
   }
 
   return (
     <div
-      className={`aspect-square w-full max-w-[140px] min-w-[120px] flex flex-col justify-between items-start rounded-lg p-3 shadow hover:shadow-md transition border ${bgColor} ${borderColor}`}
+      className={`aspect-square w-full max-w-[140px] min-w-[120px] flex flex-col justify-between items-start rounded-lg p-3 shadow hover:shadow-md transition border ${tileClass}`}
     >
       <h3 className="text-sm font-semibold">{name}</h3>
       <p className="text-xs text-gray-700">Price: {price}</p>
-      <p className={`text-xs font-bold ${textColor}`}>{signal.toUpperCase()}</p>
+      <p className="text-xs font-bold">{signal.toUpperCase()}</p>
     </div>
   );
 }
