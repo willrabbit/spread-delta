@@ -6,12 +6,14 @@ type TileData = {
   signal: 'buy' | 'sell' | 'neutral' | 'opportunity';
 };
 
+type Preferences = Record<string, string>;
+
 export default function TileGrid({
   tiles,
   preferences,
 }: {
   tiles: TileData[];
-  preferences?: Record<string, string>;
+  preferences?: Preferences;
 }) {
   return (
     <div className="px-4 py-6">
