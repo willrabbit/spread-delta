@@ -4,6 +4,8 @@ type TileProps = {
   signal: 'buy' | 'sell' | 'neutral' | 'opportunity';
 };
 
+//comment here
+
 const signalStyles = {
   buy: {
     bg: 'bg-green-100',
