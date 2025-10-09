@@ -69,34 +69,31 @@ export default function PreferencesPage() {
               <div>
                 <label className="block text-sm font-medium mb-1">Background</label>
                 <input
-                  type="text"
+                  type="color"
                   name={`${signal}_bg`}
-                  value={formData[`${signal}_bg`] || ''}
+                  value={formData[`${signal}_bg`] || '#ffffff'}
                   onChange={handleChange}
-                  className="w-full border rounded px-2 py-1"
-                  placeholder="#d1fae5"
+                  className="w-full h-10 border rounded"
                 />
               </div>
               <div>
                 <label className="block text-sm font-medium mb-1">Border</label>
                 <input
-                  type="text"
+                  type="color"
                   name={`${signal}_border`}
-                  value={formData[`${signal}_border`] || ''}
+                  value={formData[`${signal}_border`] || '#ffffff'}
                   onChange={handleChange}
-                  className="w-full border rounded px-2 py-1"
-                  placeholder="#6ee7b7"
+                  className="w-full h-10 border rounded"
                 />
               </div>
               <div>
                 <label className="block text-sm font-medium mb-1">Text</label>
                 <input
-                  type="text"
+                  type="color"
                   name={`${signal}_text`}
-                  value={formData[`${signal}_text`] || ''}
+                  value={formData[`${signal}_text`] || '#000000'}
                   onChange={handleChange}
-                  className="w-full border rounded px-2 py-1"
-                  placeholder="#047857"
+                  className="w-full h-10 border rounded"
                 />
               </div>
             </div>
