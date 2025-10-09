@@ -1,5 +1,4 @@
 import Tile from './Tile';
-//comment here
 
 type TileData = {
   name: string;
@@ -7,13 +6,19 @@ type TileData = {
   signal: 'buy' | 'sell' | 'neutral' | 'opportunity';
 };
 
-export default function TileGrid({ tiles }: { tiles: TileData[] }) {
+export default function TileGrid({
+  tiles,
+  preferences,
+}: {
+  tiles: TileData[];
+  preferences?: Record<string, string>;
+}) {
   return (
     <div className="px-4 py-6">
       <h2 className="text-xl font-bold mb-4">SpreadDelta Gateway Tiles</h2>
       <div className="flex flex-wrap gap-4 justify-start">
         {tiles.map((tile, idx) => (
-          <Tile key={idx} {...tile} />
+          <Tile key={idx} {...tile} preferences={preferences} />
         ))}
       </div>
     </div>
