@@ -1,4 +1,4 @@
-import TileGrid from '@/components/TileGrid';
+import TileGrid from '../components/TileGrid';
 
 const sampleTiles = [
   { name: 'XRP/USD', price: '$2.83', signal: 'buy' },
