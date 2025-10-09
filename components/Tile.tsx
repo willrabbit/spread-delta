@@ -4,41 +4,45 @@ type TileProps = {
   signal: 'buy' | 'sell' | 'neutral' | 'opportunity';
 };
 
-//comment here
-
-const signalStyles = {
-  buy: {
-    bg: 'bg-green-100',
-    border: 'border-green-300',
-    text: 'text-green-700',
-  },
-  sell: {
-    bg: 'bg-red-100',
-    border: 'border-red-300',
-    text: 'text-red-700',
-  },
-  neutral: {
-    bg: 'bg-yellow-100',
-    border: 'border-yellow-300',
-    text: 'text-yellow-700',
-  },
-  opportunity: {
-    bg: 'bg-blue-100',
-    border: 'border-blue-300',
-    text: 'text-blue-700',
-  },
-};
-
 export default function Tile({ name, price, signal }: TileProps) {
-  const style = signalStyles[signal];
+  let bgColor = '';
+  let borderColor = '';
+  let textColor = '';
+
+  switch (signal) {
+    case 'buy':
+      bgColor = 'bg-green-100';
+      borderColor = 'border-green-300';
+      textColor = 'text-green-700';
+      break;
+    case 'sell':
+      bgColor = 'bg-red-100';
+      borderColor = 'border-red-300';
+      textColor = 'text-red-700';
+      break;
+    case 'neutral':
+      bgColor = 'bg-yellow-100';
+      borderColor = 'border-yellow-300';
+      textColor = 'text-yellow-700';
+      break;
+    case 'opportunity':
+      bgColor = 'bg-blue-100';
+      borderColor = 'border-blue-300';
+      textColor = 'text-blue-700';
+      break;
+    default:
+      bgColor = 'bg-gray-100';
+      borderColor = 'border-gray-300';
+      textColor = 'text-gray-700';
+  }
 
   return (
     <div
-      className={`aspect-square w-full max-w-[140px] min-w-[120px] flex flex-col justify-between items-start rounded-lg p-3 shadow hover:shadow-md transition border ${style.bg} ${style.border}`}
+      className={`aspect-square w-full max-w-[140px] min-w-[120px] flex flex-col justify-between items-start rounded-lg p-3 shadow hover:shadow-md transition border ${bgColor} ${borderColor}`}
     >
       <h3 className="text-sm font-semibold">{name}</h3>
       <p className="text-xs text-gray-700">Price: {price}</p>
-      <p className={`text-xs font-bold ${style.text}`}>{signal.toUpperCase()}</p>
+      <p className={`text-xs font-bold ${textColor}`}>{signal.toUpperCase()}</p>
     </div>
   );
 }
