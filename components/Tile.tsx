@@ -31,9 +31,11 @@ export default function Tile({ name, price, signal }: TileProps) {
   const style = signalStyles[signal];
 
   return (
-    <div className={`aspect-square min-h-[150px] flex flex-col justify-between rounded-lg p-4 shadow hover:shadow-lg transition border ${style.bg} ${style.border}`}>
-      <h3 className="text-lg font-semibold">{name}</h3>
-      <p className="text-sm text-gray-600">Price: {price}</p>
+    <div
+      className={`w-full max-w-[160px] aspect-square flex flex-col justify-between items-start rounded-lg p-3 shadow hover:shadow-md transition border ${style.bg} ${style.border}`}
+    >
+      <h3 className="text-base font-semibold">{name}</h3>
+      <p className="text-sm text-gray-700">Price: {price}</p>
       <p className={`text-sm font-bold ${style.text}`}>{signal.toUpperCase()}</p>
     </div>
   );
